@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+}
+
+group 'com.taotao'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // 解释： org.springframework.boot ： 表示项目组
+    // spring-boot-starter-web ：表示项目 ， 也可看成是模块
+    //1.5.10.RELEASE :可以看成是版本号。
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.10.RELEASE")
+
+
+    //    整合MyBatis
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.1'
+
+    // 不要忘记了添加 mysql数据库驱动
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.17'
+
+    //整合JSP
+    // 添加jsp依赖支持
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.5.27'
+
+
+    compile group: 'org.apache.tomcat', name: 'tomcat-jsp-api', version: '8.5.27'
+
+}
+
+task"create-dirs" << {
+
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+
+}
